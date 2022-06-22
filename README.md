@@ -27,3 +27,221 @@ All questions, notes etc. are from the [Data Structures Easy to Advanced Course 
    | Queue             | Linked List based Queue<br>Array based Queue<br>Stack based Queue |
    | Map               | Tree Map<br>Hash Map / Hash Table                                 |
    | Vehicle           | Golf Cart<br>Bicycle<br>Smart Car                                 |
+
+## Big-O Notation
+
+5. ### What is Big-O Notation?
+
+   Big-O Notation gives an upper bound of the complexity in the **worst** case, helping to quantify performance as the input size becomes **arbitratily large**.
+
+6. ### Complexities ordered in from smallest to largest
+
+   The size of the input - **n**
+
+   - Constant Time: **O(1)**
+   - Logarithmic Time: **O(log(n))**
+   - Linear Time: **O(n)**
+   - Linearithmic / Log Linear Time: **O(n log(n))**
+   - Quadratic Time: **O(n^2)**
+   - Cubic Time: **O(n^3)**
+   - Exponential Time: **O(a^n)** => a>1
+   - Factorial Time: **O(n!)**
+
+7. ### Constant Time
+
+   O(1)
+
+8. ### Logarithmic Time
+
+   O(log(n))
+
+9. ### Linear Time
+
+   O(n)
+
+10. ### Linearithmic / Log Linear Time
+
+    O(n log(n))
+
+11. ### Quadratic Time
+
+    O(n^2)
+
+12. ### Cubic Time
+
+    O(n^3)
+
+13. ### Exponential Time
+
+    O(a^n), a>1
+
+14. ### Factorial Time
+
+    O(n!)
+
+15. ### Finding all subsets of a set
+
+    O(2^n)
+
+16. ### Finding all permutations of a string
+
+    O(n!)
+
+17. ### Sorting using merge sort
+
+    O(n log(n))
+
+18. ### Iterating over all the cells in a matrix of size n by m
+
+    O(nm)
+
+19. ### Constant Time Examples
+
+    ```js
+    const a = 1;
+    const b = 2;
+    const c = a + 5 * b; // O(1) => Constant Time
+    ```
+
+    ```js
+    let i = 0;
+    while (i < 11) {
+      i += 1;
+    } // O(1) => Constant Time
+    ```
+
+20. ### Logarithmic Time Examples
+
+    ```js
+    // Example - Binary Search
+    function binarySearch(array, value) {
+      let low = 0;
+      let high = array.length - 1;
+
+      while (low <= high) {
+        let mid = Math.floor((low + high) / 2);
+
+        if (array[mid] === value) {
+          return mid;
+        } else if (array[mid] < value) {
+          low = mid + 1;
+        } else {
+          high = mid - 1;
+        }
+      }
+
+      return -1; // Value not found
+    }
+
+    binarySearch([1, 2, 5, 7, 13, 15, 16, 18, 19, 24], 18); // 7 => O(log^2(n)) => O(log(n))
+    ```
+
+21. ### Linear Time Examples
+
+    ```js
+    let i = 0;
+    while (i < n) {
+      i += 1;
+    } // O(n) => Linear Time
+    // f(n) = n
+    // O(f(n)) = O(n)
+    ```
+
+    ```js
+    let j = 0;
+    while (j < n) {
+      j += 3;
+    } // O(n) => Linear Time
+    // f(n) = n/3
+    // O(f(n)) = O(n)
+    ```
+
+22. ### Linearithmic / Log Linear Time Examples
+
+    ```js
+    // Example - Merge Sort
+    function merge(left, right) {
+      let sorted = [];
+
+      while (left.length && right.length) {
+        if (left[0] < right[0]) {
+          sorted.push(left.shift());
+        } else {
+          sorted.push(right.shift());
+        }
+      }
+
+      return sorted.concat(left.slice().concat(right.slice()));
+    }
+
+    function mergeSort(array) {
+      const mid = array.length / 2;
+
+      if (array.length < 2) {
+        return array;
+      }
+
+      const left = mergeSort(array.slice(0, mid));
+      const right = mergeSort(array.slice(mid));
+
+      return merge(left, right);
+    }
+
+    const unsortedArr = [31, 27, 28, 42, 13];
+    mergeSort(unsortedArr); // [ 13, 27, 28, 31, 42 ] => O(n log(n))
+    ```
+
+23. Quadratic Time Examples
+
+    ```js
+    // Example 1 => Obvious since n work done n times is n*n (O(n^2))
+    for (let i = 0; i < n; i += 1) {
+      for (let j = 0; j < n; j += 1) {
+        // f(n) = n*n = n^2 => O(f(n)) = O(n^2) => Quadratic Time
+      }
+    }
+    ```
+
+    ```js
+    // Example 2
+    for (let k = 0; k < n; k += 1) {
+      for (let l = k; l < n; l += 1) {
+        // replaced 0 with k
+        // k goes from [0, n) the amount of looping done is directly determined by what k is.
+        // if k=0, we do n work, if k=1, we do n-1 work, if k=2, we do n-2 work etc.
+        // n(n+1)/2 => O(n(n+1)/2) => O(n^2/2 + n/2) => O(n^2) => Quadratic Time
+      }
+    }
+    ```
+
+24. Exponential Time Examples
+
+    ```js
+    // Example - Fibonacci
+    function fibo(num) {
+      if (num <= 1) return 1;
+
+      return fibo(num - 1) + fibo(num - 2);
+    }
+
+    fibo(6); // 13 => O(2^n)
+    ```
+
+25. Factorial Time Examples
+
+    ```js
+    // Example
+    function factorial(n) {
+      let num = n;
+
+      if (n === 0) return 1;
+
+      for (let i = 0; i < n; i++) {
+        num = n * factorial(n - 1);
+      }
+
+      return num;
+    }
+
+    factorial(4); // 24 => O(n!)
+    ```
