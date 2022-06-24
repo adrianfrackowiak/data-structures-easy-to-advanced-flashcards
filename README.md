@@ -191,7 +191,7 @@ All questions, notes etc. are from the [Data Structures Easy to Advanced Course 
     mergeSort(unsortedArr); // [ 13, 27, 28, 31, 42 ] => O(n log(n))
     ```
 
-23. Quadratic Time Examples
+23. ### Quadratic Time Examples
 
     ```js
     // Example 1 => Obvious since n work done n times is n*n (O(n^2))
@@ -214,7 +214,7 @@ All questions, notes etc. are from the [Data Structures Easy to Advanced Course 
     }
     ```
 
-24. Exponential Time Examples
+24. ### Exponential Time Examples
 
     ```js
     // Example - Fibonacci
@@ -227,7 +227,7 @@ All questions, notes etc. are from the [Data Structures Easy to Advanced Course 
     fibo(6); // 13 => O(2^n)
     ```
 
-25. Factorial Time Examples
+25. ### Factorial Time Examples
 
     ```js
     // Example
@@ -244,4 +244,53 @@ All questions, notes etc. are from the [Data Structures Easy to Advanced Course 
     }
 
     factorial(4); // 24 => O(n!)
+    ```
+
+## Dynamic and Static Arrays
+
+26. ### What is a Static Array?
+
+    A static array is a fixed length container containing n elements **indexable** from the range [0, n-1].
+
+    - What is meant by **indexable**?
+    - This means that each slot/index in the array can be referenced with a number.
+
+27. ### When and where is a Static Array used?
+
+    1. Storing and accessing sequential data
+    2. Temporarily storing objects
+    3. Used by IO routines as buffers
+    4. Lookup tables and inverse lookup tables
+    5. Can be used to return multiple values from a function
+    6. Used in dynamic programming to cache answers to subproblems
+
+28. ### Complexity Static vs Dynamic Array
+
+    |           | Static Array | Dynamic Array |
+    | --------- | ------------ | ------------- |
+    | Access    | O(1)         | O(1)          |
+    | Search    | O(n)         | O(n)          |
+    | Insertion | N/A          | O(n)          |
+    | Appending | N/A          | O(1)          |
+    | Deletion  | N/A          | O(n)          |
+
+29. ### Static Array and example
+
+    ```js
+    const a = [44, 12, 32, 48, 234, 2, 99]
+                0   1   2   3   4   5   6
+    ```
+
+    Static arrays have their size or length determined when the array is created and/or allocated.
+    Elements in `a` are referenced by their index. There is no other way to access elements in an array. Array indexing is zero-based, meaning the first element is found in posiiton zero.
+
+30. Dynamic Array and example
+    Dynamic array is a random access, variable-size list data structure that allows elements to be added or removed.
+    The dynamic array can **grow** and **shrink** in size.
+
+    ```js
+    let a = [34, 4];
+    a.push(-7); // [ 34, 4, -7 ]
+    a.push(34); // [ 34, 4, -7, 34 ]
+    a.splice(1, 1); // [ 34, -7, 34 ]
     ```
