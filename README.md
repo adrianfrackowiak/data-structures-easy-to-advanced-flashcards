@@ -282,9 +282,10 @@ All questions, notes etc. are from the [Data Structures Easy to Advanced Course 
     ```
 
     Static arrays have their size or length determined when the array is created and/or allocated.
-    Elements in `a` are referenced by their index. There is no other way to access elements in an array. Array indexing is zero-based, meaning the first element is found in posiiton zero.
+    Elements in `a` are referenced by their index. There is no other way to access elements in an array. Array indexing is zero-based, meaning the first element is found in position zero.
 
-30. Dynamic Array and example
+30. ### Dynamic Array and example
+
     Dynamic array is a random access, variable-size list data structure that allows elements to be added or removed.
     The dynamic array can **grow** and **shrink** in size.
 
@@ -293,4 +294,153 @@ All questions, notes etc. are from the [Data Structures Easy to Advanced Course 
     a.push(-7); // [ 34, 4, -7 ]
     a.push(34); // [ 34, 4, -7, 34 ]
     a.splice(1, 1); // [ 34, -7, 34 ]
+    ```
+
+## Linked Lists
+
+31. ### What is a Linked List?
+
+    A linked list is a sequential list of nodes that hold data which point to other nodes also containing data.
+
+32. ### Where are linked lists used?
+
+    - Used in many List, Queue & Stack implementations,
+    - Great for creating circular lists,
+    - Can easily model real world objects such as trains,
+    - Used in separate chaining, which is present certain Hash Table implementations to deal with hashing collisions,
+    - Often used in the implementation of adjacency lists for graphs.
+
+33. ### Linked Lists - Terminology
+
+    **Head:** The first node in a Linked List
+    **Tail:** The last node in a Linked List
+    **Pointer:** Reference to another node
+    **Node:** An object containing data and pointer(s)
+
+34. ### Singly vs Doubly Linked Lists
+
+    **Singly linked** lists only hold a reference to the next node. In the implementation you always maintain a reference to the **head** to the linked lists and a reference to the **tail** node for quick additions/removals.
+
+    With a **doubly linked** list each node holds a reference to the next and previous node. In the implementation you always maintain a reference to the **head** and the **tail** of the doubly linked list to do quick additions/removals from both ends of your list.
+
+35. ### Singly & Doubly Linked Lists Pros and Cons
+
+    |               | Pros                                           | Cons                                   |
+    | ------------- | ---------------------------------------------- | -------------------------------------- |
+    | Singly Linked | Uses less memory<br><br>Simpler implementation | Cannot easily access previous elements |
+    | Doubly Linked | Can be traversed                               | Takes 2x memory                        |
+
+36. ### Singly & Doubly Linked Lists Complexity
+
+    |                  | Singly Linked | Doubly Linked |
+    | ---------------- | ------------- | ------------- |
+    | Search           | O(n)          | O(n)          |
+    | Insert at head   | O(1)          | O(1)          |
+    | Insert at tail   | O(1)          | O(1)          |
+    | Remove at head   | O(1)          | O(1)          |
+    | Remove at tail   | O(n)          | O(1)          |
+    | Remove in middle | O(1)          | O(1)          |
+
+37. ### Linked List - **SEARCH**
+
+    ```js
+    search(value) {
+    let currentNode = this.head;
+
+    while (currentNode) {
+      if (currentNode.value === value) {
+        return currentNode;
+      }
+      currentNode = currentNode.next;
+    }
+
+    return null;
+    }
+    ```
+
+38. ### Linked List - **INSERT AT HEAD**
+
+    ```js
+    // add to beginning of list / head
+    prepend(value) {
+      // if list is empty
+      if (!this.head) {
+        this.head = this.tail = new Node(value);
+      }
+      // if linkedlist has >= one node
+      else {
+        let oldHead = this.head;
+        this.head = new Node(value);
+        oldHead.prev = this.head;
+        this.head.next = oldHead;
+      }
+    }
+    ```
+
+39. ### Linked List - **INSERT AT TAIL**
+
+    ```js
+    // add to the end of the list / tail
+    append(value) {
+      // if list is empty
+      if (!this.tail) {
+        this.head = this.tail = new Node(value);
+      }
+      // if linkedlist has >= one node
+      else {
+        let oldTail = this.tail;
+        this.tail = new Node(value);
+        oldTail.next = this.tail;
+        this.tail.prev = oldTail;
+      }
+    }
+    ```
+
+40. ### Linked List - **REMOVE AT HEAD**
+
+    ```js
+    deleteHead() {
+    // if list is empty (no head)
+      if (!this.head) {
+        return null;
+      }
+      // if linkedlist has >= 1 node
+      else {
+        let removedHead = this.head;
+        // if list has only 1 node left
+        if (this.head === this.tail) {
+          this.head = this.tail = null;
+        }
+        //if list has >1 node
+        else {
+          this.head = this.head.next;
+          this.head.prev = null;
+        }
+        return removedHead.value;
+      }
+    }
+    ```
+
+41. ### Linked List - **REMOVE AT TAIL**
+    ```js
+    deleteTail() {
+      // if list is empty (no tail)
+      if (!this.tail) {
+        return null;
+      }
+      // if linkedlist has >= one node
+      else {
+        let removedTail = this.tail;
+        // if list has only 1 node left
+        if (this.head === this.tail) {
+          this.tail = this.head = null;
+        }
+        //if list has >1 node
+        else {
+          this.tail = this.tail.prev;
+          this.tail.next = null;
+        }
+        return removedTail.value;
+      }
+    }
     ```
