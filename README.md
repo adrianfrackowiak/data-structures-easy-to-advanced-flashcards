@@ -345,16 +345,16 @@ All questions, notes etc. are from the [Data Structures Easy to Advanced Course 
 
     ```js
     search(value) {
-    let currentNode = this.head;
+      let currentNode = this.head;
 
-    while (currentNode) {
-      if (currentNode.value === value) {
-        return currentNode;
+      while (currentNode) {
+        if (currentNode.value === value) {
+          return currentNode;
+        }
+        currentNode = currentNode.next;
       }
-      currentNode = currentNode.next;
-    }
 
-    return null;
+      return null;
     }
     ```
 
@@ -443,4 +443,109 @@ All questions, notes etc. are from the [Data Structures Easy to Advanced Course 
         return removedTail.value;
       }
     }
+    ```
+
+## Stack
+
+42. ### What is a Stack?
+
+    A stack is a one-ended linear data structure which models a real world stack by having two primary operations, namely **push** and **pop**.
+
+43. ### When and where is a Stack used?
+
+    - Used by undo mechanisms in text editors,
+    - Used in compiler syntax checking for matching brackets and braces,
+    - Can be used to model a pile of books or plates,
+    - Used behind the scenes to support recursion by keeping track of previous function calls,
+    - Can be used to do a Depth First Search (DFS) on a graph.
+
+44. ### Complexity of Stack
+
+    | Pushing | O(1) |
+    | Popping | O(1) |
+    | Peeking | O(1) |
+    | Searching | O(n) |
+    | Size | O(1) |
+
+45. ### Stack Functions - Push
+
+    Add an element (or several elements) to the top of the stack.
+
+    ```js
+    push(item) {
+      return this.items.push(item);
+    }
+    ```
+
+46. ### Stack Functions - Pop
+
+    Remove the top element of the stack and return the removed element.
+
+    ```js
+    pop() {
+      return this.items.pop();
+    }
+    ```
+
+47. ### Stack Functions - Peek
+
+    Return the top element of the stack without modifying the stack itself.
+
+    ```js
+    peek() {
+      return this.items[this.length - 1];
+    }
+    ```
+
+48. ### Stack Functions - Is Empty
+
+    Return **true** if the stack does not contain any elements, **false** if the stack's size is greater than 0.
+
+    ```js
+    isEmpty() {
+      return this.items.length === 0;
+    }
+    ```
+
+49. ### Stack Functions - Clear
+
+    Remove all elements from the stack.
+
+    ```js
+    clear() {
+      this.items = [];
+    }
+    ```
+
+50. ### Stack Functions - Size
+
+    Return the number of elements in the stack (similar to the length property of an array).
+
+    ```js
+    size() {
+      return this.items.length;
+    }
+    ```
+
+51. ### How to Convert Decimal Numbers to Binary using Stack (JS)
+
+    To convert a decimal number into a binary representation, we can divide the number by 2 (since binary is a base 2 number system) until the division result is 0.
+
+    ```js
+    function decimalToBinary(num) {
+      const remStack = [];
+      let number = num;
+      let rem;
+      let binaryString = "";
+      while (number > 0) {
+        rem = Math.floor(number % 2);
+        remStack.push(rem);
+        number = Math.floor(number / 2);
+      }
+      while (remStack.length !== 0) {
+        binaryString += remStack.pop().toString();
+      }
+      return binaryString;
+    }
+    console.log(decimalToBinary(41)); // 101001
     ```
